@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>E-learning Viewer Analytics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #111;
+      color: white;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    video {
+      background: black;
+      border: 1px solid #444;
+    }
+
+    #lessonVideo {
+      width: 800px;
+      max-width: 95vw;
+    }
+
+    #webcamVideo {
+      width: 320px;
+      max-width: 95vw;
+    }
+
+    #messages {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #00ffcc;
+      white-space: pre-line;
+      min-height: 90px;
+    }
+
+    #debug {
+      margin-top: 10px;
+      color: #cccccc;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .note {
+      color: #bbbbbb;
+      max-width: 900px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>E-learning Viewer Analytics</h1>
+
+  <p class="note">
+    This demo plays a normal lesson video in the browser. When you click the button,
+    the browser asks for webcam permission and sends small webcam snapshots to the Python backend
+    for face/body attention analytics.
+  </p>
+
+  <button id="startButton">Start Webcam Analytics</button>
+
+  <div class="container">
+    <div>
+      <h2>Lesson</h2>
+      <video id="lessonVideo" controls>
+        <source src="/static/lesson.mp4" type="video/mp4">
+        Your browser does not support MP4 video playback.
+      </video>
+    </div>
+
+    <div>
+      <h2>Viewer Camera</h2>
+      <video id="webcamVideo" autoplay muted playsinline></video>
+      <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+      <div id="messages">Analytics not started</div>
+      <div id="debug"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
