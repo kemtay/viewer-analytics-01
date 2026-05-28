@@ -211,3 +211,31 @@ def analyze_frame(payload: FramePayload):
         "ear": round(ear, 3),
         "head": head_debug,
     }
+
+@app.get("/packages")
+def packages():
+    import subprocess
+    import sys
+
+    result = subprocess.run(
+        [sys.executable, "-m", "pip", "freeze"],
+        capture_output=True,
+        text=True,
+    )
+
+    return {
+        "packages": result.stdout.splitlines()
+    }
+
+@app.get("/debug")
+def debug():
+    import mediapipe as mp
+    import numpy as np
+    import cv2
+
+    return {
+        "mediapipe_version": getattr(mp, "__version__", "unknown"),
+        "mediapipe_has_solutions": hasattr(mp, "solutions"),
+        "numpy_version": np.__version__,
+        "opencv_version": cv2.__version__,
+    }
